@@ -3,6 +3,7 @@
 Compose RAG prompts from retrieved chunks with automatic metadata injection, token budget management, and multi-format output.
 
 [![npm version](https://img.shields.io/npm/v/rag-prompt-builder.svg)](https://www.npmjs.com/package/rag-prompt-builder)
+[![npm downloads](https://img.shields.io/npm/dt/rag-prompt-builder.svg)](https://www.npmjs.com/package/rag-prompt-builder)
 [![license](https://img.shields.io/npm/l/rag-prompt-builder.svg)](https://github.com/SiluPanda/rag-prompt-builder/blob/master/LICENSE)
 [![node](https://img.shields.io/node/v/rag-prompt-builder.svg)](https://nodejs.org)
 
