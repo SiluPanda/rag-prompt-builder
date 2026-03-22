@@ -4,34 +4,34 @@
 
 ### 1.1 Project Scaffolding
 
-- [ ] **Install dev dependencies** — Add `typescript`, `vitest`, `@types/node`, and `eslint` to `devDependencies` in `package.json`. Run `npm install`. | Status: not_done
-- [ ] **Configure vitest** — Add a `vitest.config.ts` (or verify `vitest` works with the existing `tsconfig.json`). Ensure `npm run test` discovers and runs tests from `src/__tests__/`. | Status: not_done
-- [ ] **Configure eslint** — Set up an ESLint config file compatible with ESLint 9+ and TypeScript. Ensure `npm run lint` passes on an empty project. | Status: not_done
+- [x] **Install dev dependencies** — Add `typescript`, `vitest`, `@types/node`, and `eslint` to `devDependencies` in `package.json`. Run `npm install`. | Status: done
+- [x] **Configure vitest** — Add a `vitest.config.ts` (or verify `vitest` works with the existing `tsconfig.json`). Ensure `npm run test` discovers and runs tests from `src/__tests__/`. | Status: done
+- [x] **Configure eslint** — Set up an ESLint config file compatible with ESLint 9+ and TypeScript. Ensure `npm run lint` passes on an empty project. | Status: done
 - [ ] **Create directory structure** — Create all directories specified in the spec: `src/templates/`, `src/formats/`, `src/__tests__/`, `src/__tests__/templates/`, `src/__tests__/formats/`. | Status: not_done
 
 ### 1.2 TypeScript Type Definitions (`src/types.ts`)
 
-- [ ] **Define `RAGSource` interface** — Required `content: string`; optional `id?: string`, `tokens?: number`, `score?: number`, `metadata?: RAGSourceMetadata`. | Status: not_done
-- [ ] **Define `RAGSourceMetadata` interface** — Optional fields: `title?: string`, `url?: string`, `date?: string`, `author?: string`, `page?: number | string`, `group?: string`, plus index signature `[key: string]: unknown`. | Status: not_done
+- [x] **Define `RAGSource` interface** — Required `content: string`; optional `id?: string`, `tokens?: number`, `score?: number`, `metadata?: RAGSourceMetadata`. | Status: done
+- [x] **Define `RAGSourceMetadata` interface** — Optional fields: `title?: string`, `url?: string`, `date?: string`, `author?: string`, `page?: number | string`, `group?: string`, plus index signature `[key: string]: unknown`. | Status: done
 - [ ] **Define `ConversationTurn` interface** — `role: 'user' | 'assistant'`, `content: string`. | Status: not_done
-- [ ] **Define `BuiltInTemplate` type** — Union: `'qa' | 'summarize' | 'compare' | 'extract' | 'conversational' | 'cite'`. | Status: not_done
+- [x] **Define `BuiltInTemplate` type** — Union: `'qa' | 'summarize' | 'compare' | 'extract' | 'conversational' | 'cite'`. | Status: done
 - [ ] **Define `TemplateName` type** — `BuiltInTemplate | string`. | Status: not_done
-- [ ] **Define `TemplateDefinition` interface** — `systemPrompt: string`, `contextPlacement?: 'user' | 'system'`, `queryFraming: string`, `sourceFormat?: SourceFormat`, `citationStyle?: CitationStyle`. | Status: not_done
-- [ ] **Define `BuiltInSourceFormat` and `SourceFormat` types** — `'numbered' | 'xml' | 'markdown' | 'json' | 'custom'`. | Status: not_done
+- [x] **Define `TemplateDefinition` interface** — `systemPrompt: string`, `contextPlacement?: 'user' | 'system'`, `queryFraming: string`, `sourceFormat?: SourceFormat`, `citationStyle?: CitationStyle`. | Status: done
+- [x] **Define `BuiltInSourceFormat` and `SourceFormat` types** — `'numbered' | 'xml' | 'markdown' | 'json' | 'custom'`. | Status: done
 - [ ] **Define `FormattedSource` interface** — `index: number`, `id: string`, `content: string`, `tokens: number`, `score?: number`, `metadata: RAGSourceMetadata`. | Status: not_done
 - [ ] **Define `CustomFormatFn` type** — `(sources: FormattedSource[]) => string`. | Status: not_done
-- [ ] **Define `OutputFormat` type** — `'openai' | 'anthropic' | 'text'`. | Status: not_done
+- [x] **Define `OutputFormat` type** — `'openai' | 'anthropic' | 'text'`. | Status: done
 - [ ] **Define `OpenAIMessage` interface** — `role: 'system' | 'user' | 'assistant'`, `content: string`. | Status: not_done
 - [ ] **Define `AnthropicMessage` interface** — `role: 'user' | 'assistant'`, `content: string`. | Status: not_done
 - [ ] **Define `MetadataConfig` interface** — Optional keys `title`, `url`, `date`, `author`, `page`, each typed `MetadataFieldConfig`. | Status: not_done
 - [ ] **Define `MetadataFieldConfig` interface** — `show?: boolean` (default true), `label?: string`. | Status: not_done
 - [ ] **Define `CitationStyle` type** — `'bracket' | 'paren' | 'superscript'`. | Status: not_done
-- [ ] **Define `BuildPromptOptions` interface** — All options from spec section 9: `template`, `systemPrompt`, `sourceFormat`, `customFormat`, `metadata`, `showMetadata`, `customMetadataFields`, `outputFormat`, `contextBudget`, `budgetStrategy`, `budgetFn`, `tokenCounter`, `history`, `contextPlacement`, `citationStyle`, `schema`, `numberedFormat`, `xmlFormat`, `markdownFormat`, `jsonFormat`. Include JSDoc on each field. | Status: not_done
+- [x] **Define `BuildPromptOptions` interface** — All options from spec section 9: `template`, `systemPrompt`, `sourceFormat`, `customFormat`, `metadata`, `showMetadata`, `customMetadataFields`, `outputFormat`, `contextBudget`, `budgetStrategy`, `budgetFn`, `tokenCounter`, `history`, `contextPlacement`, `citationStyle`, `schema`, `numberedFormat`, `xmlFormat`, `markdownFormat`, `jsonFormat`. Include JSDoc on each field. | Status: done
 - [ ] **Define `BuilderConfig` type alias** — `BuildPromptOptions`. | Status: not_done
-- [ ] **Define `BuiltPrompt` interface** — `system: string`, `messages: OpenAIMessage[] | AnthropicMessage[]`, `text?: string`, `tokenCount: number`, `template: TemplateName`, `sourceFormat: SourceFormat`, `sources: IncludedSource[]`, `droppedSources: DroppedSource[]`, `timestamp: string`. | Status: not_done
-- [ ] **Define `IncludedSource` interface** — `index: number`, `id: string`, `tokens: number`, `truncated: boolean`, `originalTokens?: number`, `metadata: RAGSourceMetadata`. | Status: not_done
+- [x] **Define `BuiltPrompt` interface** — `system: string`, `messages: OpenAIMessage[] | AnthropicMessage[]`, `text?: string`, `tokenCount: number`, `template: TemplateName`, `sourceFormat: SourceFormat`, `sources: IncludedSource[]`, `droppedSources: DroppedSource[]`, `timestamp: string`. | Status: done
+- [x] **Define `IncludedSource` interface** — `index: number`, `id: string`, `tokens: number`, `truncated: boolean`, `originalTokens?: number`, `metadata: RAGSourceMetadata`. | Status: done
 - [ ] **Define `DroppedSource` interface** — `id: string`, `tokens: number`, `reason: 'budget'`, `metadata: RAGSourceMetadata`. | Status: not_done
-- [ ] **Define `Builder` interface** — Methods: `buildPrompt(query, sources, overrides?)`, `qa(...)`, `summarize(...)`, `compare(...)`, `extract(...)`, `conversational(...)`, `cite(...)`. Each returns `BuiltPrompt`. | Status: not_done
+- [x] **Define `Builder` interface** — Methods: `buildPrompt(query, sources, overrides?)`, `qa(...)`, `summarize(...)`, `compare(...)`, `extract(...)`, `conversational(...)`, `cite(...)`. Each returns `BuiltPrompt`. | Status: done
 
 ### 1.3 Error Handling (`src/errors.ts`)
 
@@ -41,9 +41,9 @@
 
 ### 1.4 Token Counter (`src/token-counter.ts`)
 
-- [ ] **Implement default approximate token counter** — `Math.ceil(text.length / 4)`. Export as a named function. | Status: not_done
-- [ ] **Implement `countTokens` helper** — Accept a string and an optional `tokenCounter` function. Use the provided function if given, otherwise fall back to the default approximate counter. | Status: not_done
-- [ ] **Handle pre-computed `source.tokens`** — When `source.tokens` is set, use that value without calling the counter function. Document this behavior. | Status: not_done
+- [x] **Implement default approximate token counter** — `Math.ceil(text.length / 4)`. Export as a named function. | Status: done
+- [x] **Implement `countTokens` helper** — Accept a string and an optional `tokenCounter` function. Use the provided function if given, otherwise fall back to the default approximate counter. | Status: done
+- [x] **Handle pre-computed `source.tokens`** — When `source.tokens` is set, use that value without calling the counter function. Document this behavior. | Status: done
 
 ### 1.5 Metadata Rendering (`src/metadata.ts`)
 
@@ -57,11 +57,11 @@
 
 ### 1.6 Output Format Assembly (`src/output.ts`)
 
-- [ ] **Implement OpenAI format assembly** — Given system string, user content, and optional history, produce `OpenAIMessage[]` with system message as first element (`role: 'system'`), history turns, then user message. | Status: not_done
-- [ ] **Implement Anthropic format assembly** — Given system string, user content, and optional history, produce `AnthropicMessage[]` (no system role). System string returned separately via `BuiltPrompt.system`. Roles must alternate `user`/`assistant`. | Status: not_done
-- [ ] **Implement text format assembly** — Concatenate all parts into a single string with `SYSTEM:` / `USER:` / `ASSISTANT:` section markers. Populate `BuiltPrompt.text`. Messages array is `[]`. | Status: not_done
-- [ ] **Handle `contextPlacement: 'system'`** — When context is placed in the system message, append formatted sources to the system string. User message contains only query framing. | Status: not_done
-- [ ] **Handle `contextPlacement: 'user'`** — When context is placed in the user message, prepend formatted sources to the user message before the query framing. | Status: not_done
+- [x] **Implement OpenAI format assembly** — Given system string, user content, and optional history, produce `OpenAIMessage[]` with system message as first element (`role: 'system'`), history turns, then user message. | Status: done
+- [x] **Implement Anthropic format assembly** — Given system string, user content, and optional history, produce `AnthropicMessage[]` (no system role). System string returned separately via `BuiltPrompt.system`. Roles must alternate `user`/`assistant`. | Status: done
+- [x] **Implement text format assembly** — Concatenate all parts into a single string with `SYSTEM:` / `USER:` / `ASSISTANT:` section markers. Populate `BuiltPrompt.text`. Messages array is `[]`. | Status: done
+- [x] **Handle `contextPlacement: 'system'`** — When context is placed in the system message, append formatted sources to the system string. User message contains only query framing. | Status: done
+- [x] **Handle `contextPlacement: 'user'`** — When context is placed in the user message, prepend formatted sources to the user message before the query framing. | Status: done
 - [ ] **Write output format tests** — (`src/__tests__/output.test.ts`) Cover: OpenAI format structure, Anthropic format (no system in messages), text format (single string), context placement in system vs. user, conversational with history for both OpenAI and Anthropic formats. | Status: not_done
 
 ---
@@ -70,7 +70,7 @@
 
 ### 2.1 Numbered Format (`src/formats/numbered.ts`)
 
-- [ ] **Implement numbered source formatting** — Render each source as `[N] content` (1-indexed). When metadata is present and enabled, render metadata lines between the citation marker and content. | Status: not_done
+- [x] **Implement numbered source formatting** — Render each source as `[N] content` (1-indexed). When metadata is present and enabled, render metadata lines between the citation marker and content. | Status: done
 - [ ] **Support `numberPrefix` and `numberSuffix` config** — Default `'['` and `']'`. Allow customization (e.g., `'Source '` + `':'`). | Status: not_done
 - [ ] **Support `separator` config** — Default `'\n\n'` between sources. | Status: not_done
 - [ ] **Integrate metadata rendering** — Call metadata renderer to produce header lines for each source. Insert between citation marker and content. | Status: not_done
@@ -78,24 +78,24 @@
 
 ### 2.2 XML Format (`src/formats/xml.ts`)
 
-- [ ] **Implement XML source formatting** — Wrap all sources in `<sources>` root, each source in `<source>` with `id` attribute (1-indexed) and metadata as attributes. Content is the text content of the element. | Status: not_done
+- [x] **Implement XML source formatting** — Wrap all sources in `<sources>` root, each source in `<source>` with `id` attribute (1-indexed) and metadata as attributes. Content is the text content of the element. | Status: done
 - [ ] **Implement XML content escaping** — Escape `&`, `<`, `>`, `"`, `'` in source content. Controlled by `escapeContent` option (default `true`). | Status: not_done
 - [ ] **Support `rootElement` config** — Default `'sources'`. | Status: not_done
 - [ ] **Support `sourceElement` config** — Default `'source'`. | Status: not_done
 - [ ] **Support `escapeContent` config** — Default `true`. When `false`, content is inserted verbatim. | Status: not_done
-- [ ] **Render metadata as XML attributes** — Only include enabled metadata fields that are present on the source. | Status: not_done
+- [x] **Render metadata as XML attributes** — Only include enabled metadata fields that are present on the source. | Status: done
 - [ ] **Write XML format tests** — (`src/__tests__/formats/xml.test.ts`) Cover: single source, full metadata as attributes, content escaping (special chars), `escapeContent: false`, custom root/source element names, multiple sources. | Status: not_done
 
 ### 2.3 Markdown Format (`src/formats/markdown.ts`)
 
-- [ ] **Implement markdown source formatting** — Each source as a `##` section. Heading: `## Source {N}: {title}` when title present, else `## Source {N}`. Metadata fields as bold-labeled lines below heading. Content below metadata. Sources separated by `---`. | Status: not_done
+- [x] **Implement markdown source formatting** — Each source as a `##` section. Heading: `## Source {N}: {title}` when title present, else `## Source {N}`. Metadata fields as bold-labeled lines below heading. Content below metadata. Sources separated by `---`. | Status: done
 - [ ] **Support `headingLevel` config** — Default `2` (`##`). Allow 1-6. | Status: not_done
 - [ ] **Support `metadataStyle` config** — `'bold-labels'` (default): `**URL**: value`. `'list'`: `- URL: value`. `'none'`: no metadata lines. | Status: not_done
 - [ ] **Write markdown format tests** — (`src/__tests__/formats/markdown.test.ts`) Cover: single source no metadata, full metadata with bold-labels, list style, none style, custom heading level, multiple sources separated by `---`, title in heading. | Status: not_done
 
 ### 2.4 JSON Format (`src/formats/json.ts`)
 
-- [ ] **Implement JSON source formatting** — Produce a JSON array string. Each source is an object with `id`, enabled metadata fields, and `content` as top-level keys. | Status: not_done
+- [x] **Implement JSON source formatting** — Produce a JSON array string. Each source is an object with `id`, enabled metadata fields, and `content` as top-level keys. | Status: done
 - [ ] **Support `prettyPrint` config** — Default `true`. When `false`, produce minified JSON. | Status: not_done
 - [ ] **Support `contentKey` config** — Default `'content'`. Customize the key for source content. | Status: not_done
 - [ ] **Support `idField` config** — Default `'id'`. Customize the key for source ID. | Status: not_done
@@ -103,12 +103,12 @@
 
 ### 2.5 Custom Format
 
-- [ ] **Implement custom format dispatch** — When `sourceFormat` is `'custom'`, call the user-provided `customFormat` function with an array of `FormattedSource` objects. Return the string verbatim as the context section. | Status: not_done
-- [ ] **Throw `MISSING_CUSTOM_FORMAT` error** — When `sourceFormat` is `'custom'` but no `customFormat` function is provided, throw a `PromptBuilderError`. | Status: not_done
+- [x] **Implement custom format dispatch** — When `sourceFormat` is `'custom'`, call the user-provided `customFormat` function with an array of `FormattedSource` objects. Return the string verbatim as the context section. | Status: done
+- [x] **Throw `MISSING_CUSTOM_FORMAT` error** — When `sourceFormat` is `'custom'` but no `customFormat` function is provided, throw a `PromptBuilderError`. | Status: done
 
 ### 2.6 Format Dispatcher (`src/formats/index.ts`)
 
-- [ ] **Implement format dispatcher** — Given a `SourceFormat` value, route to the correct formatter (numbered, xml, markdown, json, custom). | Status: not_done
+- [x] **Implement format dispatcher** — Given a `SourceFormat` value, route to the correct formatter (numbered, xml, markdown, json, custom). | Status: done
 - [ ] **Pass format-specific options** — Forward `numberedFormat`, `xmlFormat`, `markdownFormat`, `jsonFormat` options to the respective formatter. | Status: not_done
 
 ---
@@ -117,38 +117,38 @@
 
 ### 3.1 Template Registry (`src/registry.ts`)
 
-- [ ] **Implement module-level template registry** — A `Map<string, TemplateDefinition>` that stores all registered templates. Pre-populate with the six built-in templates at module load time. | Status: not_done
-- [ ] **Implement `defineTemplate(name, template)` function** — Adds or overwrites a template in the registry. Validates that `systemPrompt` and `queryFraming` are non-empty strings. | Status: not_done
-- [ ] **Implement `getTemplate(name)` lookup** — Returns the `TemplateDefinition` for a given name. Throws `UNKNOWN_TEMPLATE` error if not found. | Status: not_done
+- [x] **Implement module-level template registry** — A `Map<string, TemplateDefinition>` that stores all registered templates. Pre-populate with the six built-in templates at module load time. | Status: done
+- [x] **Implement `defineTemplate(name, template)` function** — Adds or overwrites a template in the registry. Validates that `systemPrompt` and `queryFraming` are non-empty strings. | Status: done
+- [x] **Implement `getTemplate(name)` lookup** — Returns the `TemplateDefinition` for a given name. Throws `UNKNOWN_TEMPLATE` error if not found. | Status: done
 - [ ] **Write registry tests** — (`src/__tests__/registry.test.ts`) Cover: all six built-in templates are present, `defineTemplate` adds a new template, registered template is retrievable, overwriting a template replaces it, unknown name throws `UNKNOWN_TEMPLATE`. | Status: not_done
 
 ### 3.2 QA Template (`src/templates/qa.ts`)
 
-- [ ] **Define QA template** — System prompt as specified in spec section 5.1. Context placement: `'user'`. Query framing: `"Based on the sources above, please answer the following question:\n\n{query}"`. Default source format: `'numbered'`. | Status: not_done
+- [x] **Define QA template** — System prompt as specified in spec section 5.1. Context placement: `'user'`. Query framing: `"Based on the sources above, please answer the following question:\n\n{query}"`. Default source format: `'numbered'`. | Status: done
 - [ ] **Write QA template tests** — (`src/__tests__/templates/qa.test.ts`) Verify system prompt text, query framing with `{query}` replaced, context in user message, `systemPrompt` override replaces default but preserves framing. | Status: not_done
 
 ### 3.3 Summarize Template (`src/templates/summarize.ts`)
 
-- [ ] **Define summarize template** — System prompt as specified in spec section 5.2. Context placement: `'user'`. Query framing: when query is empty, `"Please summarize the provided sources."`; when non-empty, `"Please summarize the provided sources, focusing on: {query}"`. | Status: not_done
+- [x] **Define summarize template** — System prompt as specified in spec section 5.2. Context placement: `'user'`. Query framing: when query is empty, `"Please summarize the provided sources."`; when non-empty, `"Please summarize the provided sources, focusing on: {query}"`. | Status: done
 - [ ] **Handle empty query** — The summarize template does NOT throw `EMPTY_QUERY` for empty queries. It uses the default framing instead. | Status: not_done
 - [ ] **Write summarize template tests** — (`src/__tests__/templates/summarize.test.ts`) Verify system prompt, empty query produces default framing, non-empty query uses focus framing. | Status: not_done
 
 ### 3.4 Compare Template (`src/templates/compare.ts`)
 
-- [ ] **Define compare template** — System prompt as specified in spec section 5.3. Context placement: `'user'`. Query framing: `"Using the sources above, compare and contrast the following: {query}"`. | Status: not_done
+- [x] **Define compare template** — System prompt as specified in spec section 5.3. Context placement: `'user'`. Query framing: `"Using the sources above, compare and contrast the following: {query}"`. | Status: done
 - [ ] **Implement source grouping** — When any source has `metadata.group`, switch to grouped rendering: sources sharing a `group` value are rendered consecutively under a group heading. Sources without a `group` go in an "Other" group at the end. | Status: not_done
 - [ ] **Single group behavior** — When only one group exists (or no groups), skip the group heading. | Status: not_done
 - [ ] **Write compare template tests** — (`src/__tests__/templates/compare.test.ts`) Verify system prompt, query framing, grouped rendering with multiple groups, "Other" group for ungrouped sources, single group skips heading. | Status: not_done
 
 ### 3.5 Extract Template (`src/templates/extract.ts`)
 
-- [ ] **Define extract template** — System prompt as specified in spec section 5.4. Context placement: `'user'`. Query framing: `"From the sources above, extract the following information:\n\n{query}\n\nReturn the result as valid JSON."`. | Status: not_done
+- [x] **Define extract template** — System prompt as specified in spec section 5.4. Context placement: `'user'`. Query framing: `"From the sources above, extract the following information:\n\n{query}\n\nReturn the result as valid JSON."`. | Status: done
 - [ ] **Implement schema injection** — When `schema` option is provided (JSON Schema object or string), append it to the query framing with instructions to follow the schema exactly. | Status: not_done
 - [ ] **Write extract template tests** — (`src/__tests__/templates/extract.test.ts`) Verify system prompt, query framing, schema injection (object and string), JSON return instruction present. | Status: not_done
 
 ### 3.6 Conversational Template (`src/templates/conversational.ts`)
 
-- [ ] **Define conversational template** — System prompt as specified in spec section 5.5. Context placement: `'user'` (configurable). Query framing: the query appears as the final user message unchanged (no framing prefix). | Status: not_done
+- [x] **Define conversational template** — System prompt as specified in spec section 5.5. Context placement: `'user'` (configurable). Query framing: the query appears as the final user message unchanged (no framing prefix). | Status: done
 - [ ] **Implement history insertion** — Insert `ConversationTurn[]` entries after the system message and before the context/query message. | Status: not_done
 - [ ] **History token counting** — Include history tokens in the total `BuiltPrompt.tokenCount`. | Status: not_done
 - [ ] **Budget interaction with history** — When history + context exceeds budget, reduce context first. History is never truncated by the builder. | Status: not_done
@@ -157,14 +157,14 @@
 
 ### 3.7 Cite Template (`src/templates/cite.ts`)
 
-- [ ] **Define cite template** — System prompt as specified in spec section 5.6. Context placement: `'user'`. Query framing: `"Using the numbered sources above, answer the following question and cite your sources inline:\n\n{query}"`. | Status: not_done
+- [x] **Define cite template** — System prompt as specified in spec section 5.6. Context placement: `'user'`. Query framing: `"Using the numbered sources above, answer the following question and cite your sources inline:\n\n{query}"`. | Status: done
 - [ ] **Enforce numbered format** — The `cite` template overrides `sourceFormat` to `'numbered'` regardless of the option passed by the caller. | Status: not_done
 - [ ] **Implement citation style support** — `citationStyle` option controls how citation markers appear in the system prompt instruction: `'bracket'` (default, `[1]`), `'paren'` (`(1)`), `'superscript'` (uses `^1` notation). | Status: not_done
 - [ ] **Write cite template tests** — (`src/__tests__/templates/cite.test.ts`) Verify system prompt, enforced numbered format, citation styles (bracket, paren, superscript) reflected in system prompt text. | Status: not_done
 
 ### 3.8 Template Dispatcher (`src/templates/index.ts`)
 
-- [ ] **Implement template dispatcher** — Given a template name, look up the `TemplateDefinition` from the registry and apply it (return system prompt, query framing, context placement). | Status: not_done
+- [x] **Implement template dispatcher** — Given a template name, look up the `TemplateDefinition` from the registry and apply it (return system prompt, query framing, context placement). | Status: done
 
 ---
 
@@ -172,7 +172,7 @@
 
 ### 4.1 Budget Strategies (`src/budget.ts`)
 
-- [ ] **Implement `truncate-tail` strategy** — Include sources in order from head. Drop sources from the tail until the remaining sources fit within `contextBudget`. Dropped sources go to `droppedSources`. | Status: not_done
+- [x] **Implement `truncate-tail` strategy** — Include sources in order from head. Drop sources from the tail until the remaining sources fit within `contextBudget`. Dropped sources go to `droppedSources`. | Status: done
 - [ ] **Implement `proportional` strategy** — Proportionally shorten all sources to fit within `contextBudget`. Truncate at sentence boundaries (not mid-sentence). All sources are included. | Status: not_done
 - [ ] **Implement `truncate-longest` strategy** — Truncate the longest source first, re-evaluate. Repeat until total fits within budget. Produces more balanced source lengths. | Status: not_done
 - [ ] **Implement `custom` strategy dispatch** — When `budgetStrategy` is `'custom'`, call the user-provided `budgetFn` with the sources array and budget. Return the result. | Status: not_done
@@ -188,49 +188,49 @@
 
 ### 5.1 `buildPrompt` Function (`src/build-prompt.ts`)
 
-- [ ] **Implement `buildPrompt(query, sources, options?)` orchestration** — Validate inputs, look up template, resolve options (merge defaults < template defaults < options), format sources, inject metadata, enforce budget, assemble output, compute token count, construct `BuiltPrompt`. Synchronous function. | Status: not_done
-- [ ] **Validate `query` parameter** — For templates that require a non-empty query (`qa`, `compare`, `extract`, `cite`), throw `EMPTY_QUERY` if query is empty string. `summarize` and `conversational` allow empty queries. | Status: not_done
-- [ ] **Validate `sources` parameter** — Must be an array. Each entry must have a `content` string. Throw `INVALID_SOURCES` if not. | Status: not_done
-- [ ] **Assign default source IDs** — When `source.id` is absent, assign `"source-{index}"` (1-indexed). | Status: not_done
-- [ ] **Compute token counts for sources** — Use `source.tokens` when available. Otherwise call the configured `tokenCounter`. | Status: not_done
-- [ ] **Apply budget enforcement** — When `contextBudget` is set and finite, enforce the configured budget strategy before formatting. | Status: not_done
-- [ ] **Format sources with chosen formatter** — Call the format dispatcher with resolved source format and format-specific options. | Status: not_done
-- [ ] **Apply template** — Inject formatted sources and query into the template's structure (system prompt + context placement + query framing). | Status: not_done
-- [ ] **Handle `systemPrompt` override** — When `systemPrompt` is provided in options, replace the template's system prompt but keep query framing and context placement. | Status: not_done
+- [x] **Implement `buildPrompt(query, sources, options?)` orchestration** — Validate inputs, look up template, resolve options (merge defaults < template defaults < options), format sources, inject metadata, enforce budget, assemble output, compute token count, construct `BuiltPrompt`. Synchronous function. | Status: done
+- [x] **Validate `query` parameter** — For templates that require a non-empty query (`qa`, `compare`, `extract`, `cite`), throw `EMPTY_QUERY` if query is empty string. `summarize` and `conversational` allow empty queries. | Status: done
+- [x] **Validate `sources` parameter** — Must be an array. Each entry must have a `content` string. Throw `INVALID_SOURCES` if not. | Status: done
+- [x] **Assign default source IDs** — When `source.id` is absent, assign `"source-{index}"` (1-indexed). | Status: done
+- [x] **Compute token counts for sources** — Use `source.tokens` when available. Otherwise call the configured `tokenCounter`. | Status: done
+- [x] **Apply budget enforcement** — When `contextBudget` is set and finite, enforce the configured budget strategy before formatting. | Status: done
+- [x] **Format sources with chosen formatter** — Call the format dispatcher with resolved source format and format-specific options. | Status: done
+- [x] **Apply template** — Inject formatted sources and query into the template's structure (system prompt + context placement + query framing). | Status: done
+- [x] **Handle `systemPrompt` override** — When `systemPrompt` is provided in options, replace the template's system prompt but keep query framing and context placement. | Status: done
 - [ ] **Handle empty sources** — When `sources` is an empty array, replace the context section with a placeholder string (default: `"No sources provided."`). Respect `noSourcesPlaceholder` option. | Status: not_done
-- [ ] **Assemble output format** — Call the output assembler with the correct format (openai, anthropic, text). | Status: not_done
-- [ ] **Compute total `tokenCount`** — Sum of: system prompt tokens + context section tokens + query framing tokens + history tokens (if conversational). | Status: not_done
-- [ ] **Build `sources` manifest** — For each included source: `index`, `id`, `tokens`, `truncated`, `originalTokens` (if truncated), `metadata`. | Status: not_done
-- [ ] **Build `droppedSources` array** — For each dropped source: `id`, `tokens`, `reason: 'budget'`, `metadata`. | Status: not_done
-- [ ] **Set `timestamp`** — ISO 8601 string of when `buildPrompt()` was called. | Status: not_done
-- [ ] **Set `template` and `sourceFormat`** — Reflect the actual template and source format used. | Status: not_done
+- [x] **Assemble output format** — Call the output assembler with the correct format (openai, anthropic, text). | Status: done
+- [x] **Compute total `tokenCount`** — Sum of: system prompt tokens + context section tokens + query framing tokens + history tokens (if conversational). | Status: done
+- [x] **Build `sources` manifest** — For each included source: `index`, `id`, `tokens`, `truncated`, `originalTokens` (if truncated), `metadata`. | Status: done
+- [x] **Build `droppedSources` array** — For each dropped source: `id`, `tokens`, `reason: 'budget'`, `metadata`. | Status: done
+- [x] **Set `timestamp`** — ISO 8601 string of when `buildPrompt()` was called. | Status: done
+- [x] **Set `template` and `sourceFormat`** — Reflect the actual template and source format used. | Status: done
 - [ ] **Write `buildPrompt` integration tests** — (`src/__tests__/build-prompt.test.ts`) Cover: basic Q&A with numbered format, all template/format combinations, system prompt override, empty sources with placeholder, budget enforcement populating droppedSources, tokenCount accuracy, sources manifest correctness, timestamp validity, default values. | Status: not_done
 
 ### 5.2 Convenience Functions
 
-- [ ] **Implement `qa()` convenience function** — Thin wrapper: `buildPrompt(query, sources, { ...options, template: 'qa' })`. | Status: not_done
-- [ ] **Implement `summarize()` convenience function** — Thin wrapper: `buildPrompt(query, sources, { ...options, template: 'summarize' })`. | Status: not_done
-- [ ] **Implement `compare()` convenience function** — Thin wrapper: `buildPrompt(query, sources, { ...options, template: 'compare' })`. | Status: not_done
-- [ ] **Implement `extract()` convenience function** — Thin wrapper: `buildPrompt(query, sources, { ...options, template: 'extract' })`. | Status: not_done
-- [ ] **Implement `conversational()` convenience function** — Thin wrapper: `buildPrompt(query, sources, { ...options, template: 'conversational' })`. | Status: not_done
-- [ ] **Implement `cite()` convenience function** — Thin wrapper: `buildPrompt(query, sources, { ...options, template: 'cite' })`. | Status: not_done
+- [x] **Implement `qa()` convenience function** — Thin wrapper: `buildPrompt(query, sources, { ...options, template: 'qa' })`. | Status: done
+- [x] **Implement `summarize()` convenience function** — Thin wrapper: `buildPrompt(query, sources, { ...options, template: 'summarize' })`. | Status: done
+- [x] **Implement `compare()` convenience function** — Thin wrapper: `buildPrompt(query, sources, { ...options, template: 'compare' })`. | Status: done
+- [x] **Implement `extract()` convenience function** — Thin wrapper: `buildPrompt(query, sources, { ...options, template: 'extract' })`. | Status: done
+- [x] **Implement `conversational()` convenience function** — Thin wrapper: `buildPrompt(query, sources, { ...options, template: 'conversational' })`. | Status: done
+- [x] **Implement `cite()` convenience function** — Thin wrapper: `buildPrompt(query, sources, { ...options, template: 'cite' })`. | Status: done
 
 ### 5.3 Factory Function (`src/factory.ts`)
 
-- [ ] **Implement `createBuilder(config)` factory** — Accept a `BuilderConfig` (same shape as `BuildPromptOptions`). Validate config at construction time. Return a `Builder` object. | Status: not_done
-- [ ] **Implement option merging** — Per-call overrides > factory config > built-in defaults. Merge deeply for nested options (`metadata`, `numberedFormat`, etc.). | Status: not_done
-- [ ] **Builder instance is stateless** — Multiple calls to the same builder with different queries/sources must not interfere. | Status: not_done
-- [ ] **Expose all convenience methods on Builder** — `builder.buildPrompt()`, `builder.qa()`, `builder.summarize()`, `builder.compare()`, `builder.extract()`, `builder.conversational()`, `builder.cite()`. | Status: not_done
+- [x] **Implement `createBuilder(config)` factory** — Accept a `BuilderConfig` (same shape as `BuildPromptOptions`). Validate config at construction time. Return a `Builder` object. | Status: done
+- [x] **Implement option merging** — Per-call overrides > factory config > built-in defaults. Merge deeply for nested options (`metadata`, `numberedFormat`, etc.). | Status: done
+- [x] **Builder instance is stateless** — Multiple calls to the same builder with different queries/sources must not interfere. | Status: done
+- [x] **Expose all convenience methods on Builder** — `builder.buildPrompt()`, `builder.qa()`, `builder.summarize()`, `builder.compare()`, `builder.extract()`, `builder.conversational()`, `builder.cite()`. | Status: done
 - [ ] **Write factory tests** — (`src/__tests__/factory.test.ts`) Cover: factory config applied, per-call overrides take precedence, all convenience methods work, builder is reusable/stateless, invalid config throws at construction. | Status: not_done
 
 ### 5.4 Public Exports (`src/index.ts`)
 
-- [ ] **Export `buildPrompt`** — From `build-prompt.ts`. | Status: not_done
-- [ ] **Export convenience functions** — `qa`, `summarize`, `compare`, `extract`, `conversational`, `cite`. | Status: not_done
-- [ ] **Export `createBuilder`** — From `factory.ts`. | Status: not_done
-- [ ] **Export `defineTemplate`** — From `registry.ts`. | Status: not_done
+- [x] **Export `buildPrompt`** — From `build-prompt.ts`. | Status: done
+- [x] **Export convenience functions** — `qa`, `summarize`, `compare`, `extract`, `conversational`, `cite`. | Status: done
+- [x] **Export `createBuilder`** — From `factory.ts`. | Status: done
+- [x] **Export `defineTemplate`** — From `registry.ts`. | Status: done
 - [ ] **Export `PromptBuilderError`** — From `errors.ts`. | Status: not_done
-- [ ] **Export all TypeScript types** — All interfaces, type aliases from `types.ts`. | Status: not_done
+- [x] **Export all TypeScript types** — All interfaces, type aliases from `types.ts`. | Status: done
 
 ---
 
@@ -329,7 +329,7 @@
 
 - [ ] **Write performance benchmarks** — Create a benchmark script that measures assembly time for: minimal (5 sources, 100 tokens each, no metadata), typical (10 sources, 300 tokens each), large (20 sources, 500 tokens each, full metadata), budget enforcement (20 sources, 500 tokens each, proportional). | Status: not_done
 - [ ] **Verify sub-millisecond targets** — Minimal < 0.1ms, typical < 0.5ms, large < 1ms, full metadata < 2ms, budget enforcement < 2ms. | Status: not_done
-- [ ] **Optimize string assembly** — Use `Array.join` and template literals, not `+=` loops. Verify no regex in hot path. | Status: not_done
+- [x] **Optimize string assembly** — Use `Array.join` and template literals, not `+=` loops. Verify no regex in hot path. | Status: done
 - [ ] **Lazy metadata rendering** — Only build metadata headers when at least one field is present and enabled. O(1) check per source. | Status: not_done
 
 ---
