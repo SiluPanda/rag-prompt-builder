@@ -1,5 +1,14 @@
 import type { RAGSource, SourceFormat } from './types.js'
 
+function escapeXml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;')
+}
+
 function buildMetaLine(source: RAGSource): string {
   const m = source.metadata ?? {}
   const parts: string[] = []
@@ -14,11 +23,11 @@ function buildMetaLine(source: RAGSource): string {
 function buildXmlAttrs(source: RAGSource, index: number): string {
   const m = source.metadata ?? {}
   const attrs: string[] = [`id="${index}"`]
-  if (m.title) attrs.push(`title="${m.title}"`)
-  if (m.url) attrs.push(`url="${m.url}"`)
-  if (m.date) attrs.push(`date="${m.date}"`)
-  if (m.author) attrs.push(`author="${m.author}"`)
-  if (m.page != null) attrs.push(`page="${m.page}"`)
+  if (m.title) attrs.push(`title="${escapeXml(String(m.title))}"`)
+  if (m.url) attrs.push(`url="${escapeXml(String(m.url))}"`)
+  if (m.date) attrs.push(`date="${escapeXml(String(m.date))}"`)
+  if (m.author) attrs.push(`author="${escapeXml(String(m.author))}"`)
+  if (m.page != null) attrs.push(`page="${escapeXml(String(m.page))}"`)
   return attrs.join(' ')
 }
 
@@ -47,11 +56,12 @@ export function formatSources(
       return sources
         .map((s, i) => {
           const num = i + 1
+          const escaped = escapeXml(s.content)
           if (showMetadata) {
             const attrs = buildXmlAttrs(s, num)
-            return `<source ${attrs}>\n${s.content}\n</source>`
+            return `<source ${attrs}>\n${escaped}\n</source>`
           }
-          return `<source id="${num}">\n${s.content}\n</source>`
+          return `<source id="${num}">\n${escaped}\n</source>`
         })
         .join('\n\n')
     }
