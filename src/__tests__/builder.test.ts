@@ -145,6 +145,23 @@ describe('formatSources', () => {
   it('custom format throws when no function provided', () => {
     expect(() => formatSources([src1], 'custom', false)).toThrow('customFormat')
   })
+
+  it('xml format escapes special characters in content', () => {
+    const src: RAGSource = { content: 'Discount: <50% off & free "shipping">' }
+    const result = formatSources([src], 'xml', false)
+    expect(result).toContain('&lt;50% off &amp; free &quot;shipping&quot;&gt;')
+    expect(result).not.toContain('<50%')
+  })
+
+  it('xml format escapes special characters in metadata attributes', () => {
+    const src: RAGSource = {
+      content: 'Hello',
+      metadata: { title: 'Tom & Jerry\'s "Guide"', url: 'https://example.com?a=1&b=2' },
+    }
+    const result = formatSources([src], 'xml', true)
+    expect(result).toContain('title="Tom &amp; Jerry&apos;s &quot;Guide&quot;"')
+    expect(result).toContain('url="https://example.com?a=1&amp;b=2"')
+  })
 })
 
 describe('token budget', () => {
@@ -187,6 +204,37 @@ describe('token budget', () => {
       tokenCounter: counter,
     })
     expect(result.droppedSources).toHaveLength(1)
+  })
+
+  it('respects pre-computed tokens field in budget calculations', () => {
+    // Source with 400 chars (100 tokens by default counter) but pre-computed as 10 tokens
+    const src: RAGSource = { content: 'A'.repeat(400), id: 'precomputed', tokens: 10 }
+    // Budget of 20 should fit this source (pre-computed 10 <= 20)
+    const result = buildPrompt('query', [src], {
+      contextBudget: 20,
+      budgetStrategy: 'drop',
+    })
+    expect(result.sources).toHaveLength(1)
+    expect(result.droppedSources).toHaveLength(0)
+  })
+
+  it('truncated source token count reflects actual content, not remaining budget', () => {
+    const counter = (t: string) => Math.ceil(t.length / 4)
+    const src: RAGSource = { content: 'A'.repeat(400), id: 'big' }
+    // 400 chars = 100 tokens, budget 50 → truncated
+    const result = buildPrompt('query', [src], {
+      contextBudget: 50,
+      budgetStrategy: 'truncate',
+      tokenCounter: counter,
+    })
+    expect(result.sources).toHaveLength(1)
+    // Token count should reflect actual truncated content, not the budget
+    const reportedTokens = result.sources[0].tokens
+    const userMsg = result.messages.find((m) => m.role === 'user')!
+    // Extract approximate truncated content length from message
+    expect(reportedTokens).toBeLessThanOrEqual(50)
+    expect(reportedTokens).toBeGreaterThan(0)
+    expect(userMsg.content.length).toBeLessThan(400 + 200)
   })
 })
 

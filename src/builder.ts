@@ -21,7 +21,7 @@ function applyBudget(
   let used = 0
 
   for (const source of sources) {
-    const tokens = tokenCounter(source.content)
+    const tokens = source.tokens ?? tokenCounter(source.content)
     if (used + tokens <= budget) {
       fitted.push(source)
       used += tokens
@@ -31,8 +31,9 @@ function applyBudget(
         // Truncate content to fit remaining budget (approx by char ratio)
         const ratio = remaining / tokens
         const truncatedContent = source.content.slice(0, Math.floor(source.content.length * ratio))
-        fitted.push({ ...source, content: truncatedContent, tokens: remaining })
-        used += remaining
+        const actualTokens = tokenCounter(truncatedContent)
+        fitted.push({ ...source, content: truncatedContent, tokens: actualTokens })
+        used += actualTokens
       } else {
         dropped.push(source)
       }
