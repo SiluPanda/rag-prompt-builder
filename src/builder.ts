@@ -126,7 +126,7 @@ export function buildPrompt(
     index: i + 1,
     id: s.id ?? String(i + 1),
     tokens: s.tokens ?? tokenCounter(s.content),
-    truncated: s !== sources[i] && s.content !== sources[i]?.content,
+    truncated: sources.indexOf(s) === -1,
     metadata: s.metadata ?? {},
   }))
 
