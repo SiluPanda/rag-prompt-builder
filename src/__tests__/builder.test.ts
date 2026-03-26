@@ -236,6 +236,33 @@ describe('token budget', () => {
     expect(reportedTokens).toBeGreaterThan(0)
     expect(userMsg.content.length).toBeLessThan(400 + 200)
   })
+
+  it('non-truncated sources after dropped sources report truncated=false', () => {
+    // Original: [A(100 tokens), B(100 tokens), C(10 tokens), D(10 tokens)]
+    // Budget=25 with drop strategy: A is dropped (100>25), B is dropped (100>25),
+    // C fits (10<=25), D fits (10+10=20<=25)
+    // Bug: without fix, fittedSources[0]=C compared against sources[0]=A → wrong truncated=true
+    const srcA: RAGSource = { content: 'A'.repeat(400), id: 'A' }
+    const srcB: RAGSource = { content: 'B'.repeat(400), id: 'B' }
+    const srcC: RAGSource = { content: 'C'.repeat(40), id: 'C' }
+    const srcD: RAGSource = { content: 'D'.repeat(40), id: 'D' }
+
+    const result = buildPrompt('query', [srcA, srcB, srcC, srcD], {
+      contextBudget: 25,
+      budgetStrategy: 'drop',
+    })
+
+    // A and B should be dropped
+    expect(result.droppedSources).toHaveLength(2)
+    expect(result.droppedSources.map((s) => s.id)).toEqual(['A', 'B'])
+
+    // C and D should be included and NOT marked as truncated
+    expect(result.sources).toHaveLength(2)
+    expect(result.sources[0].id).toBe('C')
+    expect(result.sources[0].truncated).toBe(false)
+    expect(result.sources[1].id).toBe('D')
+    expect(result.sources[1].truncated).toBe(false)
+  })
 })
 
 describe('createBuilder', () => {
